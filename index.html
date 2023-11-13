@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <script src="index.js"></script>
     <div id="top-section"></div>
 
     <h2>Exercises Dropdown Form</h2>
@@ -14,44 +15,47 @@
     <form action="#" method="post">
         <label for="dropdown1">Type of Exercise:</label>
         <select id="dropdown1" name="dropdown1">
-            <option value="Cardio">Cardio</option>
-            <option value="Olympic Weightlifting">Olympic Weightlifting</option>
-            <option value="Plyometrics">Plyometrics</option>
-            <option value="Powerlifting">Powerlifting</option>
-            <option value="Strength">Strength</option>
-            <option value="Stretching">Stretching</option>
-            <option value="Strongman">Strongman</option>
+            <option value=""></option>
+            <option value="cardio">Cardio</option>
+            <option value="olympic_weightlifting">Olympic Weightlifting</option>
+            <option value="plyometrics">Plyometrics</option>
+            <option value="powerlifting">Powerlifting</option>
+            <option value="strength">Strength</option>
+            <option value="stretching">Stretching</option>
+            <option value="strongman">Strongman</option>
         </select>
     
         <br>
     
         <label for="dropdown2">Muscle Group:</label>
         <select id="dropdown2" name="dropdown2">
-            <option value="Abdominals">Abdominals</option>
-            <option value="Abductors">Abductors</option>
-            <option value="Adductors">Adductors</option>
-            <option value="Biceps">Biceps</option>
-            <option value="Calves">Calves</option>
-            <option value="Chest">Chest</option>
-            <option value="Forearms">Forearms</option>
-            <option value="Glutes">Glutes</option>
-            <option value="Hamstrings">Hamstrings</option>
-            <option value="Lats">Lats</option>
-            <option value="Lower Back">Lower Back</option>
-            <option value="Middle Back">Middle Back</option>
-            <option value="Neck">Neck</option>
-            <option value="Quadriceps">Quadriceps</option>
-            <option value="Traps">Traps</option>
-            <option value="Triceps">Triceps</option>
+            <option value=""></option>
+            <option value="abdominals">abdominals</option>
+            <option value="abductors">Abductors</option>
+            <option value="adductors">Adductors</option>
+            <option value="biceps">Biceps</option>
+            <option value="calves">Calves</option>
+            <option value="chest">Chest</option>
+            <option value="forearms">Forearms</option>
+            <option value="glutes">Glutes</option>
+            <option value="hamstrings">Hamstrings</option>
+            <option value="lats">Lats</option>
+            <option value="lower Back">Lower Back</option>
+            <option value="middle Back">Middle Back</option>
+            <option value="neck">Neck</option>
+            <option value="quadriceps">Quadriceps</option>
+            <option value="traps">Traps</option>
+            <option value="triceps">Triceps</option>
         </select>
     
         <br>
     
         <label for="dropdown3">Difficulty:</label>
         <select id="dropdown3" name="dropdown3">
-            <option value="Beginner">Beginner</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Difficult">Difficult</option>
+            <option value=""></option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="difficult">Difficult</option>
         </select>
     
         <br>
@@ -72,12 +76,12 @@
     <h2>My Exercises:</h2>
     <div id="bottom-exercises-list"></div>
     <table id="bottom-table">
-        <tr>
+         <tr>
+             <th id="bottom-name">Name ▼</th>
             <th id="bottom-exercise">Exercise ▼</th>
             <th id="bottom-muscle">Muscle Group ▼</th>
             <th id="bottom-difficulty">Difficulty ▼</th>
-        </tr>
-
+         </tr>
     </table>
     
 

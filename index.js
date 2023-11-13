@@ -146,9 +146,6 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
 
-
-  
-
   
   function bottomHalf(savedExercises) {
     console.log(savedExercises);

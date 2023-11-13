@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+//Main test
+
 let submissionForm = document.querySelector("form")
 submissionForm.addEventListener("submit", (e) => {
 e.preventDefault()

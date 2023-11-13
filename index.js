@@ -106,12 +106,13 @@ document.addEventListener("DOMContentLoaded", () => {
       let newCardDiv = document.createElement("div");
       newCardDiv.className = "product-card";
       newCardDiv.innerHTML = `
-        <h5>${index.name}</h5>
-        <button type="button" id='${index.name} Button'>Add to My Exercises</button>
-        <p>${index.type}</p>
-        <p>Muscle Type:${index.muscle}</p>
-        <p>Difficulty:${index.difficulty}</p>
-        <p>${index.equipment}</p>
+        <h3>${index.name} <button type="button" id='${index.name} Button'>+</button></h3>
+        <div class="inner-card-container">
+        <p>Type of Exercise: ${index.type.toUpperCase()}</p>
+        <p>Muscle Group: ${index.muscle.toUpperCase()}</p>
+        <p>Difficulty: ${index.difficulty.toUpperCase()}</p>
+        <p>Equipment: ${index.equipment.toUpperCase()}</p>
+        </div>
         <p id="exercise-instructions">${instrucBrief}</p>
       `;
     

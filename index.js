@@ -27,3 +27,7 @@ fetch('https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises', {
 		'X-RapidAPI-Host': 'exercises-by-api-ninjas.p.rapidapi.com'}
 }).then(resp => resp.json())
 .then(data => console.log(data))
+
+
+
+//make a test array of 9 exercises that 

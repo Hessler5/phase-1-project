@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //Main test
 //update test
+//test1
 
 let submissionForm = document.querySelector("form")
 submissionForm.addEventListener("submit", (e) => {

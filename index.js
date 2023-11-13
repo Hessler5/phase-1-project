@@ -98,11 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
-
-
-
       let newCardDiv = document.createElement("div");
       newCardDiv.className = "product-card";
       newCardDiv.innerHTML = `
@@ -112,17 +107,23 @@ document.addEventListener("DOMContentLoaded", () => {
         <p>Muscle Type:${index.muscle}</p>
         <p>Difficulty:${index.difficulty}</p>
         <p>${index.equipment}</p>
-        <p id="exercise-instructions">${instrucBrief}</p>
+        <p id='${index.name} Brief'>${instrucBrief}</p>
       `;
     
       initialCardList.appendChild(newCardDiv);
 
          //add event listener to exercise instructions and replace HTML with index.instructions
-         let expandInstruc = document.getElementById("exercise-instructions");
+         let expandInstruc = document.getElementById(`${index.name} Brief`);
          expandInstruc.addEventListener('click', () => {
            console.log("hi")
            expandInstruc.textContent = index.instructions;
          })
+
+         //adding the # of results (in case there are 0)
+      let resultsNum = document.createElement('p')
+      resultsNum.textContent = (`There are ${exerciseList.length} results`)
+      submissionForm.appendChild(resultsNum)
+      //fix the above so it doesn't print out 10 times
     
       let button = document.getElementById(`${index.name} Button`);
       button.addEventListener('click', () => { 
@@ -144,6 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   
   })
+
 
 
   
@@ -208,10 +210,59 @@ document.addEventListener("DOMContentLoaded", () => {
   let bottomExercise = document.getElementById("bottom-exercise")
   let bottomMuscle = document.getElementById("bottom-muscle")
   let bottomDifficulty = document.getElementById("bottom-difficulty")
+
+  let clickCounterName = 0;
+  let clickCounterExercise = 0;
+  let clickCounterMuscle = 0;
+  let clickCounterDifficulty = 0;
+
   
-  bottomName.addEventListener('dblclick', () => sortTable(0));
-  bottomExercise.addEventListener('dblclick', () => sortTable(1));
-  bottomMuscle.addEventListener('dblclick', () => sortTable(2));
-  bottomDifficulty.addEventListener('dblclick', () => sortTable(3));
+  bottomName.addEventListener('dblclick', () => {
+    sortTable(0);
+
+    clickCounterName++;
+
+    if (clickCounterName % 2 === 1) {
+        bottomName.textContent = "Category ▲";
+    } else {
+        bottomName.textContent = "Category ▼";
+    }
+});
+
+bottomExercise.addEventListener('dblclick', () => {
+  sortTable(0);
+
+  clickCounterExercise++;
+
+  if (clickCounterExercise % 2 === 1) {
+      bottomExercise.textContent = "Exercise ▲";
+  } else {
+      bottomExercise.textContent = "Exercise ▼";
+  }
+});
+
+bottomMuscle.addEventListener('dblclick', () => {
+  sortTable(0);
+
+  clickCounterMuscle++;
+
+  if (clickCounterMuscle % 2 === 1) {
+      bottomMuscle.textContent = "Muscle Group ▲";
+  } else {
+      bottomMuscle.textContent = "Muscle Group ▼";
+  }
+});
+
+bottomDifficulty.addEventListener('dblclick', () => {
+  sortTable(0);
+
+  clickCounterDifficulty++;
+
+  if (clickCounterDifficulty % 2 === 1) {
+      bottomDifficulty.textContent = "Difficulty ▲";
+  } else {
+      bottomDifficulty.textContent = "Difficulty ▼";
+  }
+});
   
   })

@@ -87,14 +87,14 @@ document.addEventListener("DOMContentLoaded", () => {
   
   //function to create cards at the top
   function renderCards(exerciseList){
-    let initialCardList = document.querySelector("#initial-exercises-list")  
-
+    let initialCardList = document.querySelector("#initial-exercises-list")
     initialCardList.innerHTML = ""
 
     //adding the # of results (in case there are 0)
     let resultsNum = document.createElement('p')
     resultsNum.textContent = (`There are ${exerciseList.length} results`)
     submissionForm.appendChild(resultsNum)
+    //fix the above so it doesn't print out 10 times
 
 
     for (let i = 0; i < exerciseList.length; i++) {
@@ -111,22 +111,18 @@ document.addEventListener("DOMContentLoaded", () => {
       let newCardDiv = document.createElement("div");
       newCardDiv.className = "product-card";
       newCardDiv.innerHTML = `
-
-        <h3>${index.name} <button type="button" id='${index.name} Button'>+</button></h3>
-        <div class="inner-card-container">
-        <p>Type of Exercise: ${index.type.toUpperCase()}</p>
-        <p>Muscle Group: ${index.muscle.toUpperCase()}</p>
-        <p>Difficulty: ${index.difficulty.toUpperCase()}</p>
-        <p>Equipment: ${index.equipment.toUpperCase()}</p>
-        </div>
-        <p id="exercise-instructions">${instrucBrief}</p>`;
+        <h5>${index.name}</h5>
+        <button type="button" id='${index.name} Button'>Add to My Exercises</button>
+        <p>${index.type}</p>
+        <p>Muscle Type: ${index.muscle}</p>
+        <p>Difficulty: ${index.difficulty}</p>
+        <p>Equiptment: ${index.equipment}</p>
+        <p id='${index.name} Brief'>${instrucBrief}</p>
+      `;
     
       initialCardList.appendChild(newCardDiv);
 
          //add event listener to exercise instructions and replace HTML with index.instructions
-         let expandInstruc = document.getElementById(`exercise-instructions`);
-         expandInstruc.addEventListener('click', () => {
-           expandInstruc.textContent = index.instructions;
          let clickCounterExpand = 0;
          let expandInstruc = document.getElementById(`${index.name} Brief`);
          expandInstruc.addEventListener('click', () => {
@@ -147,11 +143,17 @@ document.addEventListener("DOMContentLoaded", () => {
           el.parentNode.removeChild(el);
         }
         bottomHalf(savedExercises);
-      });
-    })
-  }
+
+
   
+
+
+      });
+    }
   }
+
+  
+  })
 
 
 
@@ -272,5 +274,4 @@ bottomDifficulty.addEventListener('dblclick', () => {
   }
 });
   
-})
-})
+  })

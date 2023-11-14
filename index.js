@@ -145,6 +145,7 @@ function fetchOnSearch() {
       newCardDiv.innerHTML = `
         <h3>${index.name}</h3>
         <button type="button" id='${instructionId} Button'><strong>Add to My Exercises</strong></button>
+        <button type="button" id='${instructionId} Lookup'><strong>Google Exercise</strong></button>
         <p><strong>Exercise Type: </strong>${index.type}</p>
         <p><strong>Muscle Type: </strong>${index.muscle}</p>
         <p><strong>Difficulty: </strong>${index.difficulty}</p>
@@ -166,6 +167,26 @@ function fetchOnSearch() {
           }
          })
     
+         let lookupButton = document.getElementById(`${instructionId} Lookup`);
+         lookupButton.addEventListener('click', () => {
+             let exName = index.name;
+             let brokenName = exName.split(" ");
+             let recombinedName = [];
+         
+             for (let word of brokenName) {
+                 let newWord = word[0].toUpperCase() + word.slice(1, word.length);
+                 recombinedName.push(newWord);
+             }
+         
+             let finalName = recombinedName.join("+");
+             console.log(finalName);
+         
+             var linkToRedirect = `https://www.google.com/search?q=${finalName}`;
+             window.open(linkToRedirect, '_blank');
+             return finalName;
+         });
+         
+      
       let button = document.getElementById(`${instructionId} Button`);
       button.addEventListener('click', () => { 
         savedExercises.push(index);
@@ -174,11 +195,9 @@ function fetchOnSearch() {
         for (const el of tableRows) {
           el.parentNode.removeChild(el);
         }
+        
         bottomHalf(savedExercises);
 
-
-  
-      
 
       });
     }
@@ -209,7 +228,25 @@ function fetchOnSearch() {
       td = tr.insertCell(tr.cells.length);
       td.innerHTML = savedExercises[i].difficulty;
       td.setAttribute("align", "center");
+      
+      //creating delete button
+      td = tr.insertCell(tr.cells.length);
+      let deleteButton = document.createElement('button')
+      deleteButton.textContent = 'Delete'
+      td.appendChild(deleteButton)
+
+      deleteButton.addEventListener('click',e => {
+        deleteRow(deleteButton)
+      })
     }
+
+    function deleteRow(button) {
+      // Find the row containing the button
+      var row = button.parentNode.parentNode;
+      // Delete the row
+      document.getElementById("bottom-table").deleteRow(row.rowIndex);
+    }
+
   }
   
   function sortTable(columnIndex) {

@@ -79,6 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     for(let i = 0; i < data.length; i++){
       unsavedExercises.push(data[i])
     }
+    unsavedExercises.map(cleanUpNames)
     console.log(unsavedExercises)
     renderCards(unsavedExercises)
      // bottomHalf(data);
@@ -114,10 +115,10 @@ document.addEventListener("DOMContentLoaded", () => {
       newCardDiv.innerHTML = `
         <h3>${index.name}</h3>
         <button type="button" id='${index.name} Button'><strong>Add to My Exercises</strong></button>
-        <p><strong>${index.type}</strong></p>
+        <p><strong>Exercise Type: </strong>${index.type}</p>
         <p><strong>Muscle Type: </strong>${index.muscle}</p>
         <p><strong>Difficulty: </strong>${index.difficulty}</p>
-        <p> <strong>Equiptment: </strong>${index.equipment}</p>
+        <p> <strong>Equipment: </strong>${index.equipment}</p>
         <p id='${index.name} Brief'><strong>Instructions: </strong>${instrucBrief}</p>
       `;
     
@@ -276,3 +277,29 @@ bottomDifficulty.addEventListener('dblclick', () => {
 });
   
   })
+
+
+
+  function cleanUpNames(card) {
+  card.difficulty = firstLetterCaps(card.difficulty)
+  card.equipment = firstLetterCaps(card.equipment)
+  card.muscle = firstLetterCaps(card.muscle)
+  card.type = removeUnderScore(card.type)
+  card.type = firstLetterCaps(card.type)
+}
+
+function removeUnderScore(type) {
+  let no_ = type.replace("_", " ")
+  return no_
+}
+
+
+function firstLetterCaps(string) {
+  let stringToCapitalize = string.split(" ");
+  let CapitalizedString = []
+  for (word of stringToCapitalize){
+    let capitalWord = word[0].toUpperCase() + word.slice(1,word.length)
+    CapitalizedString.push(capitalWord)
+  }
+  return CapitalizedString.join(" ")
+}

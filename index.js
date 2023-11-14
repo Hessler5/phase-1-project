@@ -148,14 +148,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         bottomHalf(savedExercises);
       });
-    }
-    let numberofResults = document.createElement("p")
-    numberofResults.textContent = `${exerciseList.length} Results`
-    initialCardList.appendChild(numberofResults)
-
+    })
   }
   
-  })
+  }
 
 
 
@@ -276,4 +272,5 @@ bottomDifficulty.addEventListener('dblclick', () => {
   }
 });
   
-  })
+})
+})

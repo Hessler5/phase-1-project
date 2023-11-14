@@ -385,6 +385,7 @@ bottomDifficulty.addEventListener('dblclick', () => {
   function cleanUpNames(card) {
   card.difficulty = firstLetterCaps(card.difficulty)
   card.equipment = firstLetterCaps(card.equipment)
+  card.muscle = removeUnderScore(card.muscle)
   card.muscle = firstLetterCaps(card.muscle)
   card.type = removeUnderScore(card.type)
   card.type = firstLetterCaps(card.type)

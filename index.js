@@ -283,6 +283,41 @@ function fetchOnSearch() {
       }
     }
   }
+
+  function sortTableReverse(columnIndex) {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("bottom-table");
+    switching = true;
+    console.log(columnIndex);
+    while (switching) {
+      switching = false;
+      rows = table.rows;
+  
+      for (i = 1; i < rows.length - 1; i++) {
+        shouldSwitch = false;
+  
+        // Check if rows[i] and rows[i + 1] are defined
+        if (rows[i] && rows[i + 1]) {
+          x = rows[i]
+            .getElementsByTagName("td")
+            [columnIndex].innerText.toLowerCase();
+          y = rows[i + 1]
+            .getElementsByTagName("td")
+            [columnIndex].innerText.toLowerCase();
+  
+          if (x < y) {
+            shouldSwitch = true;
+            break;
+          }
+        }
+      }
+  
+      if (shouldSwitch) {
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+      }
+    }
+  }
   
   let bottomName = document.getElementById("bottom-name")
   let bottomExercise = document.getElementById("bottom-exercise")
@@ -296,51 +331,51 @@ function fetchOnSearch() {
 
   
   bottomName.addEventListener('dblclick', () => {
-    sortTable(0);
-
     clickCounterName++;
-
+   
     if (clickCounterName % 2 === 1) {
-        bottomName.textContent = "Category ▲";
-    } else {
-        bottomName.textContent = "Category ▼";
-    }
+      sortTableReverse(0);
+      bottomName.textContent = "Category ▲";
+  } else {
+    sortTable(0);
+    bottomName.textContent = "Category ▼";
+  }
 });
 
 bottomExercise.addEventListener('dblclick', () => {
-  sortTable(1);
-
   clickCounterExercise++;
-
+ 
   if (clickCounterExercise % 2 === 1) {
-      bottomExercise.textContent = "Exercise ▲";
-  } else {
-      bottomExercise.textContent = "Exercise ▼";
-  }
+    sortTableReverse(0);
+    bottomExercise.textContent = "Exercise ▲";
+} else {
+  sortTable(0);
+  bottomExercise.textContent = "Exercise ▼";
+}
 });
 
 bottomMuscle.addEventListener('dblclick', () => {
-  sortTable(2);
-
   clickCounterMuscle++;
-
+ 
   if (clickCounterMuscle % 2 === 1) {
-      bottomMuscle.textContent = "Muscle Group ▲";
-  } else {
-      bottomMuscle.textContent = "Muscle Group ▼";
-  }
+    sortTableReverse(0);
+    bottomMuscle.textContent = "Muscle Group ▲";
+} else {
+  sortTable(0);
+  bottomMuscle.textContent = "Muscle Group ▼";
+}
 });
 
 bottomDifficulty.addEventListener('dblclick', () => {
-  sortTable(3);
-
   clickCounterDifficulty++;
-
+ 
   if (clickCounterDifficulty % 2 === 1) {
-      bottomDifficulty.textContent = "Difficulty ▲";
-  } else {
-      bottomDifficulty.textContent = "Difficulty ▼";
-  }
+    sortTableReverse(0);
+    bottomDifficulty.textContent = "Difficulty ▲";
+} else {
+  sortTable(0);
+  bottomDifficulty.textContent = "Difficulty ▼";
+}
 });
   
   })

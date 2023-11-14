@@ -6,7 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let submissionForm = document.querySelector("form")
   submissionForm.addEventListener("submit", (e) => {
+  console.log("Form submitted!");
+  e.stopImmediatePropagation();
   e.preventDefault()
+  
   
   
   //button values
@@ -86,6 +89,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderCards(exerciseList){
     let initialCardList = document.querySelector("#initial-exercises-list")
     initialCardList.innerHTML = ""
+
+    //adding the # of results (in case there are 0)
+    let resultsNum = document.createElement('p')
+    resultsNum.textContent = (`There are ${exerciseList.length} results`)
+    submissionForm.appendChild(resultsNum)
+    //fix the above so it doesn't print out 10 times
+
+
     for (let i = 0; i < exerciseList.length; i++) {
       let index = exerciseList[i];
 
@@ -93,8 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
       //for index.instructions, need to create an array of the first 50 characters
       //add event listener to expand the array to show the entire description
       let instructions = index.instructions;
-      var instrucBrief = instructions.split(' ').slice(0,20).join(' ')+"...";
-
+      var instrucBrief = instructions.split(' ').slice(0,20).join(' ')+"...▼";
 
 
 
@@ -104,26 +114,25 @@ document.addEventListener("DOMContentLoaded", () => {
         <h5>${index.name}</h5>
         <button type="button" id='${index.name} Button'>Add to My Exercises</button>
         <p>${index.type}</p>
-        <p>Muscle Type:${index.muscle}</p>
-        <p>Difficulty:${index.difficulty}</p>
-        <p>${index.equipment}</p>
+        <p>Muscle Type: ${index.muscle}</p>
+        <p>Difficulty: ${index.difficulty}</p>
+        <p>Equiptment: ${index.equipment}</p>
         <p id='${index.name} Brief'>${instrucBrief}</p>
       `;
     
       initialCardList.appendChild(newCardDiv);
 
          //add event listener to exercise instructions and replace HTML with index.instructions
+         let clickCounterExpand = 0;
          let expandInstruc = document.getElementById(`${index.name} Brief`);
          expandInstruc.addEventListener('click', () => {
-           console.log("hi")
-           expandInstruc.textContent = index.instructions;
+          clickCounterExpand++; 
+          if (clickCounterExpand % 2 === 1) {
+            expandInstruc.textContent = index.instructions;
+          } else {
+            expandInstruc.textContent = instrucBrief;
+          }
          })
-
-         //adding the # of results (in case there are 0)
-      let resultsNum = document.createElement('p')
-      resultsNum.textContent = (`There are ${exerciseList.length} results`)
-      submissionForm.appendChild(resultsNum)
-      //fix the above so it doesn't print out 10 times
     
       let button = document.getElementById(`${index.name} Button`);
       button.addEventListener('click', () => { 
@@ -230,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 bottomExercise.addEventListener('dblclick', () => {
-  sortTable(0);
+  sortTable(1);
 
   clickCounterExercise++;
 
@@ -242,7 +251,7 @@ bottomExercise.addEventListener('dblclick', () => {
 });
 
 bottomMuscle.addEventListener('dblclick', () => {
-  sortTable(0);
+  sortTable(2);
 
   clickCounterMuscle++;
 
@@ -254,7 +263,7 @@ bottomMuscle.addEventListener('dblclick', () => {
 });
 
 bottomDifficulty.addEventListener('dblclick', () => {
-  sortTable(0);
+  sortTable(3);
 
   clickCounterDifficulty++;
 

@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let difficulty;
   let and1;
   let and2;
+  let offset = 0;
 
 
   //Populates search functionality based off of selections
@@ -65,39 +66,66 @@ document.addEventListener("DOMContentLoaded", () => {
   let unsavedExercises = [];
   
   //fetch from API 
+  fetchOnSearch()
+
+function fetchOnSearch() {
+
+  let fetchValue = `https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises?${type}${and1}${muscle}${and2}${difficulty}&offset=${offset}`
   
-  let fetchValue = `https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises?${type}${and1}${muscle}${and2}${difficulty}`
-  
-  
-  fetch(fetchValue, {
+ fetch(fetchValue, {
       method: 'GET',
       headers: {
         'X-RapidAPI-Key': 'affff5fc7cmsh5968ae8730f2592p11fb2bjsn6c0de3b97452',
         'X-RapidAPI-Host': 'exercises-by-api-ninjas.p.rapidapi.com'}
   }).then(resp => {return resp.json()})
   .then(data => {
+    unsavedExercises = []
     for(let i = 0; i < data.length; i++){
       unsavedExercises.push(data[i])
     }
     unsavedExercises.map(cleanUpNames)
     console.log(unsavedExercises)
     renderCards(unsavedExercises)
+    let oldResults = document.querySelector('.resultsNum')
+    if(oldResults != null){
+      oldResults.remove()
+    }
+    let resultsNum = document.createElement('p')
+    resultsNum.className = 'resultsNum'
+    resultsNum.textContent = (`There are ${unsavedExercises.length} results`)
+    submissionForm.appendChild(resultsNum)
+
+    if(offset >= 10){
+      let PreviousPageButton = document.createElement("button")
+      PreviousPageButton.textContent = "Previouse Page"
+      let initialCardList = document.querySelector("#initial-exercises-list")
+      initialCardList.appendChild(PreviousPageButton)
+      PreviousPageButton.addEventListener("click",() => {
+        offset -= 10
+        fetchOnSearch()
+      })
+    }
+
+    if(unsavedExercises.length === 10){
+      let nextPageButton = document.createElement("button")
+      nextPageButton.textContent = "Next Page"
+      let initialCardList = document.querySelector("#initial-exercises-list")
+      initialCardList.appendChild(nextPageButton)
+      nextPageButton.addEventListener("click",() => {
+        offset += 10
+        fetchOnSearch()
+      })
+    }
+
      // bottomHalf(data);
       sortTable(0);
     })
-  
+}
+
   //function to create cards at the top
   function renderCards(exerciseList){
     let initialCardList = document.querySelector("#initial-exercises-list")
     initialCardList.innerHTML = ""
-
-    //adding the # of results (in case there are 0)
-    let resultsNum = document.createElement('p')
-    resultsNum.className = 'resultsNum'
-    resultsNum.textContent = (`There are ${exerciseList.length} results`)
-    submissionForm.append(resultsNum)
-    //fix the above so it doesn't print out 10 times
-
 
     for (let i = 0; i < exerciseList.length; i++) {
       let index = exerciseList[i];
@@ -107,27 +135,29 @@ document.addEventListener("DOMContentLoaded", () => {
       //add event listener to expand the array to show the entire description
       let instructions = index.instructions;
       var instrucBrief = instructions.split(' ').slice(0,20).join(' ')+"...▼";
-
-
+      let instructionId = index.name
+      instructionId = instructionId.replace("\'", "")
+      
+      console.log(instructionId)
 
       let newCardDiv = document.createElement("div");
       newCardDiv.className = "product-card";
       newCardDiv.innerHTML = `
         <h3>${index.name}</h3>
-        <button type="button" id='${index.name} Button'><strong>Add to My Exercises</strong></button>
-        <button type="button" id='${index.name} Lookup'><strong>Google Exercise</strong></button>
+        <button type="button" id='${instructionId} Button'><strong>Add to My Exercises</strong></button>
+        <button type="button" id='${instructionId} Lookup'><strong>Google Exercise</strong></button>
         <p><strong>Exercise Type: </strong>${index.type}</p>
         <p><strong>Muscle Type: </strong>${index.muscle}</p>
         <p><strong>Difficulty: </strong>${index.difficulty}</p>
         <p> <strong>Equipment: </strong>${index.equipment}</p>
-        <p id='${index.name} Brief'><strong>Instructions: </strong>${instrucBrief}</p>
+        <p id='${instructionId} Brief'><strong>Instructions: </strong>${instrucBrief}</p>
       `;
     
       initialCardList.appendChild(newCardDiv);
 
          //add event listener to exercise instructions and replace HTML with index.instructions
          let clickCounterExpand = 0;
-         let expandInstruc = document.getElementById(`${index.name} Brief`);
+         let expandInstruc = document.getElementById(`${instructionId} Brief`);
          expandInstruc.addEventListener('click', () => {
           clickCounterExpand++; 
           if (clickCounterExpand % 2 === 1) {
@@ -137,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
          })
     
-         let lookupButton = document.getElementById(`${index.name} Lookup`);
+         let lookupButton = document.getElementById(`${instructionId} Lookup`);
          lookupButton.addEventListener('click', () => {
              let exName = index.name;
              let brokenName = exName.split(" ");
@@ -157,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
          });
          
       
-      let button = document.getElementById(`${index.name} Button`);
+      let button = document.getElementById(`${instructionId} Button`);
       button.addEventListener('click', () => { 
         savedExercises.push(index);
         //remove all current rows with the class name "table-rows"
@@ -165,8 +195,9 @@ document.addEventListener("DOMContentLoaded", () => {
         for (const el of tableRows) {
           el.parentNode.removeChild(el);
         }
-
+        
         bottomHalf(savedExercises);
+
 
       });
     }

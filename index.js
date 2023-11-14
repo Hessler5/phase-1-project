@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let resultsNum = document.createElement('p')
     resultsNum.className = 'resultsNum'
     resultsNum.textContent = (`There are ${exerciseList.length} results`)
-    submissionForm.appendChild(resultsNum)
+    submissionForm.append(resultsNum)
     //fix the above so it doesn't print out 10 times
 
 
@@ -115,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
       newCardDiv.innerHTML = `
         <h3>${index.name}</h3>
         <button type="button" id='${index.name} Button'><strong>Add to My Exercises</strong></button>
+        <button type="button" id='${index.name} Lookup'><strong>Google Exercise</strong></button>
         <p><strong>Exercise Type: </strong>${index.type}</p>
         <p><strong>Muscle Type: </strong>${index.muscle}</p>
         <p><strong>Difficulty: </strong>${index.difficulty}</p>
@@ -136,6 +137,26 @@ document.addEventListener("DOMContentLoaded", () => {
           }
          })
     
+         let lookupButton = document.getElementById(`${index.name} Lookup`);
+         lookupButton.addEventListener('click', () => {
+             let exName = index.name;
+             let brokenName = exName.split(" ");
+             let recombinedName = [];
+         
+             for (let word of brokenName) {
+                 let newWord = word[0].toUpperCase() + word.slice(1, word.length);
+                 recombinedName.push(newWord);
+             }
+         
+             let finalName = recombinedName.join("+");
+             console.log(finalName);
+         
+             var linkToRedirect = `https://www.google.com/search?q=${finalName}`;
+             window.open(linkToRedirect, '_blank');
+             return finalName;
+         });
+         
+      
       let button = document.getElementById(`${index.name} Button`);
       button.addEventListener('click', () => { 
         savedExercises.push(index);
@@ -144,11 +165,8 @@ document.addEventListener("DOMContentLoaded", () => {
         for (const el of tableRows) {
           el.parentNode.removeChild(el);
         }
+
         bottomHalf(savedExercises);
-
-
-  
-
 
       });
     }
@@ -179,7 +197,25 @@ document.addEventListener("DOMContentLoaded", () => {
       td = tr.insertCell(tr.cells.length);
       td.innerHTML = savedExercises[i].difficulty;
       td.setAttribute("align", "center");
+      
+      //creating delete button
+      td = tr.insertCell(tr.cells.length);
+      let deleteButton = document.createElement('button')
+      deleteButton.textContent = 'Delete'
+      td.appendChild(deleteButton)
+
+      deleteButton.addEventListener('click',e => {
+        deleteRow(deleteButton)
+      })
     }
+
+    function deleteRow(button) {
+      // Find the row containing the button
+      var row = button.parentNode.parentNode;
+      // Delete the row
+      document.getElementById("bottom-table").deleteRow(row.rowIndex);
+    }
+
   }
   
   function sortTable(columnIndex) {

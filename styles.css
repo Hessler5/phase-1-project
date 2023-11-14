@@ -2,8 +2,7 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color:#22092C;
-    color: white;
+    background-color:white;
 }
 
 
@@ -35,20 +34,15 @@ body {
 }
 
 #initial-exercises-list {
-    border: solid;
-    border-color: black;
     border-radius: 5px;
     margin: 1.5%;
-    background-color: #BE3144;
-    color: white;
+    color: black;
 }
 
 .product-card {
-    border: solid;
-    border-color: black;
     border-radius: 5px;
     margin: 1%;
-    background-color: #F05941;
+    background-color: lightgrey;
 }
 
 .inner-card-container {

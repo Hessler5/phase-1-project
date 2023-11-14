@@ -87,14 +87,14 @@ document.addEventListener("DOMContentLoaded", () => {
   
   //function to create cards at the top
   function renderCards(exerciseList){
-    let initialCardList = document.querySelector("#initial-exercises-list")
+    let initialCardList = document.querySelector("#initial-exercises-list")  
+
     initialCardList.innerHTML = ""
 
     //adding the # of results (in case there are 0)
     let resultsNum = document.createElement('p')
     resultsNum.textContent = (`There are ${exerciseList.length} results`)
     submissionForm.appendChild(resultsNum)
-    //fix the above so it doesn't print out 10 times
 
 
     for (let i = 0; i < exerciseList.length; i++) {
@@ -124,6 +124,9 @@ document.addEventListener("DOMContentLoaded", () => {
       initialCardList.appendChild(newCardDiv);
 
          //add event listener to exercise instructions and replace HTML with index.instructions
+         let expandInstruc = document.getElementById(`exercise-instructions`);
+         expandInstruc.addEventListener('click', () => {
+           expandInstruc.textContent = index.instructions;
          let clickCounterExpand = 0;
          let expandInstruc = document.getElementById(`${index.name} Brief`);
          expandInstruc.addEventListener('click', () => {
@@ -144,15 +147,13 @@ document.addEventListener("DOMContentLoaded", () => {
           el.parentNode.removeChild(el);
         }
         bottomHalf(savedExercises);
-
-
-  
-
-
       });
     }
-  }
+    let numberofResults = document.createElement("p")
+    numberofResults.textContent = `${exerciseList.length} Results`
+    initialCardList.appendChild(numberofResults)
 
+  }
   
   })
 

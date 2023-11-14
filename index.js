@@ -6,7 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let submissionForm = document.querySelector("form")
   submissionForm.addEventListener("submit", (e) => {
+  console.log("Form submitted!");
+  e.stopImmediatePropagation();
   e.preventDefault()
+  
   
   
   //button values
@@ -84,9 +87,16 @@ document.addEventListener("DOMContentLoaded", () => {
   
   //function to create cards at the top
   function renderCards(exerciseList){
-    let initialCardList = document.querySelector("#initial-exercises-list")
-    initialCardList.innerHTML = " "
-    
+    let initialCardList = document.querySelector("#initial-exercises-list")  
+
+    initialCardList.innerHTML = ""
+
+    //adding the # of results (in case there are 0)
+    let resultsNum = document.createElement('p')
+    resultsNum.textContent = (`There are ${exerciseList.length} results`)
+    submissionForm.appendChild(resultsNum)
+
+
     for (let i = 0; i < exerciseList.length; i++) {
       let index = exerciseList[i];
 
@@ -94,14 +104,14 @@ document.addEventListener("DOMContentLoaded", () => {
       //for index.instructions, need to create an array of the first 50 characters
       //add event listener to expand the array to show the entire description
       let instructions = index.instructions;
-      var instrucBrief = instructions.split(' ').slice(0,20).join(' ')+"...";
-
+      var instrucBrief = instructions.split(' ').slice(0,20).join(' ')+"...▼";
 
 
 
       let newCardDiv = document.createElement("div");
       newCardDiv.className = "product-card";
       newCardDiv.innerHTML = `
+
         <h3>${index.name} <button type="button" id='${index.name} Button'>+</button></h3>
         <div class="inner-card-container">
         <p>Type of Exercise: ${index.type.toUpperCase()}</p>
@@ -117,6 +127,15 @@ document.addEventListener("DOMContentLoaded", () => {
          let expandInstruc = document.getElementById(`exercise-instructions`);
          expandInstruc.addEventListener('click', () => {
            expandInstruc.textContent = index.instructions;
+         let clickCounterExpand = 0;
+         let expandInstruc = document.getElementById(`${index.name} Brief`);
+         expandInstruc.addEventListener('click', () => {
+          clickCounterExpand++; 
+          if (clickCounterExpand % 2 === 1) {
+            expandInstruc.textContent = index.instructions;
+          } else {
+            expandInstruc.textContent = instrucBrief;
+          }
          })
     
       let button = document.getElementById(`${index.name} Button`);
@@ -222,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 bottomExercise.addEventListener('dblclick', () => {
-  sortTable(0);
+  sortTable(1);
 
   clickCounterExercise++;
 
@@ -234,7 +253,7 @@ bottomExercise.addEventListener('dblclick', () => {
 });
 
 bottomMuscle.addEventListener('dblclick', () => {
-  sortTable(0);
+  sortTable(2);
 
   clickCounterMuscle++;
 
@@ -246,7 +265,7 @@ bottomMuscle.addEventListener('dblclick', () => {
 });
 
 bottomDifficulty.addEventListener('dblclick', () => {
-  sortTable(0);
+  sortTable(3);
 
   clickCounterDifficulty++;
 

@@ -92,6 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //adding the # of results (in case there are 0)
     let resultsNum = document.createElement('p')
+    resultsNum.className = 'resultsNum'
     resultsNum.textContent = (`There are ${exerciseList.length} results`)
     submissionForm.appendChild(resultsNum)
     //fix the above so it doesn't print out 10 times
@@ -111,13 +112,13 @@ document.addEventListener("DOMContentLoaded", () => {
       let newCardDiv = document.createElement("div");
       newCardDiv.className = "product-card";
       newCardDiv.innerHTML = `
-        <h5>${index.name}</h5>
-        <button type="button" id='${index.name} Button'>Add to My Exercises</button>
-        <p>${index.type}</p>
-        <p>Muscle Type: ${index.muscle}</p>
-        <p>Difficulty: ${index.difficulty}</p>
-        <p>Equiptment: ${index.equipment}</p>
-        <p id='${index.name} Brief'>${instrucBrief}</p>
+        <h3>${index.name}</h3>
+        <button type="button" id='${index.name} Button'><strong>Add to My Exercises</strong></button>
+        <p><strong>${index.type}</strong></p>
+        <p><strong>Muscle Type: </strong>${index.muscle}</p>
+        <p><strong>Difficulty: </strong>${index.difficulty}</p>
+        <p> <strong>Equiptment: </strong>${index.equipment}</p>
+        <p id='${index.name} Brief'><strong>Instructions: </strong>${instrucBrief}</p>
       `;
     
       initialCardList.appendChild(newCardDiv);

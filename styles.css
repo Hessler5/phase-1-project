@@ -41,8 +41,13 @@ body {
 
 .product-card {
     border-radius: 5px;
-    margin: 1%;
-    background-color: lightgrey;
+    margin: 3%;
+    background-color: #e6e6e6;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .inner-card-container {
@@ -50,10 +55,70 @@ body {
     justify-content: space-between;
 }
 
-#initial-exercises-list p {
-    margin: 15px;
+
+button {
+    background-color: #3498db; /* Blue background color */
+    color: #ffffff; /* White text color */
+    padding: 5px 10px; /* Adjust padding for the desired size */
+    border: none;
+    border-radius: 5px; /* Optional: Add rounded corners for a sleek look */
+    transition: background-color 0.3s ease; /* Optional: Add a smooth transition effect */
 }
 
-#initial-exercises-list h3 {
-    margin: 15px;
+button:hover {
+    background-color: #2980b9; /* Darker blue color on hover */
 }
+
+form {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+}
+
+label, select, input {
+    margin-bottom: 10px;
+    margin-right: 20px;
+}
+
+h1 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+h2 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+table {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.resultsNum {
+    font-style: italic;
+}
+
+input {
+    background-color: #3498db; /* Blue background color */
+    color: #ffffff; /* White text color */
+    padding: 5px 10px; /* Adjust padding for the desired size */
+    border: none;
+    border-radius: 5px; /* Optional: Add rounded corners for a sleek look */
+    transition: background-color 0.3s ease; /* Optional: Add a smooth transition effect */
+}
+
+input:hover {
+    background-color: #2980b9; /* Darker blue color on hover */
+}
+

@@ -97,23 +97,25 @@ function fetchOnSearch() {
 
     if(offset >= 10){
       let PreviousPageButton = document.createElement("button")
+      PreviousPageButton.id = "PreviousPageButton"
       PreviousPageButton.textContent = "Previouse Page"
       let initialCardList = document.querySelector("#initial-exercises-list")
       initialCardList.appendChild(PreviousPageButton)
       PreviousPageButton.addEventListener("click",() => {
         offset -= 10
-        fetchOnSearch()
+        setTimeout(fetchOnSearch(), 100)
       })
     }
 
     if(unsavedExercises.length === 10){
       let nextPageButton = document.createElement("button")
       nextPageButton.textContent = "Next Page"
+      nextPageButton.id = "nextPageButton"
       let initialCardList = document.querySelector("#initial-exercises-list")
       initialCardList.appendChild(nextPageButton)
       nextPageButton.addEventListener("click",() => {
         offset += 10
-        fetchOnSearch()
+        setTimeout(fetchOnSearch(), 100)
       })
     }
 
@@ -150,7 +152,7 @@ function fetchOnSearch() {
         <p><strong>Muscle Type: </strong>${index.muscle}</p>
         <p><strong>Difficulty: </strong>${index.difficulty}</p>
         <p> <strong>Equipment: </strong>${index.equipment}</p>
-        <p id='${instructionId} Brief'><strong>Instructions: </strong>${instrucBrief}</p>
+        <p class="expansion" id='${instructionId} Brief'><strong>Instructions: </strong>${instrucBrief}</p>
       `;
     
       initialCardList.appendChild(newCardDiv);

@@ -138,3 +138,16 @@ input:hover {
     background-color: #2980b9; /* Darker blue color on hover */
 }
 
+.expansion:hover {
+    cursor: pointer;
+}
+
+#nextPageButton {
+    margin-right: 30%;
+    position: relative;
+    float: right;
+}
+
+#PreviousPageButton{
+    margin-left: 30%;
+}

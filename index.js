@@ -92,8 +92,11 @@ function fetchOnSearch() {
     }
     let resultsNum = document.createElement('p')
     resultsNum.className = 'resultsNum'
-    resultsNum.textContent = (`There are ${unsavedExercises.length} results`)
-    submissionForm.appendChild(resultsNum)
+    resultsNum.textContent = `There are ${unsavedExercises.length} results`
+    resultsNum.style.marginBottom = "15px";
+    resultsNum.style.marginLeft = "15px";
+   
+    document.querySelector("#results").appendChild(resultsNum)
 
     if(offset >= 10){
       let PreviousPageButton = document.createElement("button")
@@ -386,6 +389,7 @@ bottomDifficulty.addEventListener('dblclick', () => {
 
   function cleanUpNames(card) {
   card.difficulty = firstLetterCaps(card.difficulty)
+  card.equipment = removeUnderScore(card.equipment)
   card.equipment = firstLetterCaps(card.equipment)
   card.muscle = removeUnderScore(card.muscle)
   card.muscle = firstLetterCaps(card.muscle)

@@ -97,8 +97,6 @@ form {
     padding-left: 30px;
     padding-right: 30px;
     display: flex;
-            flex-direction: column;
-            align-items: flex-start;
 }
 
 label, select, input {
@@ -122,7 +120,6 @@ h2 {
 
 .resultsNum {
     font-style: italic;
-    float: left;
 }
 
 input {
@@ -150,4 +147,35 @@ input:hover {
 
 #PreviousPageButton{
     margin-left: 20%;
+}
+
+.filters {
+    background-color: lightgrey;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-radius: 25px;
+}
+
+.filters h3 {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+#search {
+    margin: 0px;
+    border-radius: 25px;
+    width: 100px;
+    margin-right: 25px;
+    font-size: 20px;
+}
+
+#results {
+    margin-bottom: 15px;
+}
+
+label {
+    margin-right: 10px;
+    margin-left: 10px;
 }

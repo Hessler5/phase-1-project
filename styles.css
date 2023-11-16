@@ -143,11 +143,11 @@ input:hover {
 }
 
 #nextPageButton {
-    margin-right: 30%;
+    margin-right: 25%;
     position: relative;
     float: right;
 }
 
 #PreviousPageButton{
-    margin-left: 30%;
+    margin-left: 25%;
 }
